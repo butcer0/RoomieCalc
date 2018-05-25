@@ -8,14 +8,6 @@ import {
 
 import Settings from './Settings';
 import Calculator from './Calculator';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
 const defaultPerc = (((1/2)+(1/3))/2);
 
 var PAGEENUMS = Object.freeze({'main':0, 'settings':1});
@@ -27,7 +19,7 @@ export default class App extends Component<Props> {
   state = {
     currentPage: PAGEENUMS.settings,
     calcState: CALCSTATE.default,
-    calcCustomPercent: 0.0,
+    calcCustomPercent: defaultPerc,
   }
 
 setCurrentPage = (currentPage) => {
@@ -41,11 +33,12 @@ updateSettings = (calcState, calcCustomPercent) => {
 render() {
   if(this.state.currentPage == PAGEENUMS.main) {
     return (
-      <Calculator style={styles.main}/>
+      <Calculator onOpenSettings={this.setCurrentPage} calcCustomPercent={this.state.calcCustomPercent}
+        style={styles.main}/>
     );
   } else if(this.state.currentPage == PAGEENUMS.settings) {
     return (
-      <Settings updateSettings={this.updateSettings} onBack={this.setCurrentPage}
+      <Settings updateSettings={this.updateSettings} onBack={this.setCurrentPage} calcCustomPercent={this.state.calcCustomPercent}
         style={styles.main}/>
     );
   }

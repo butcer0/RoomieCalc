@@ -3,41 +3,60 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
+import PropTypes from 'prop-types';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+var PAGEENUMS = Object.freeze({'main':0, 'settings':1});
+var CALCSTATE = Object.freeze({'default':0, 'custom':1});
+const defaultPerc = (((1/2)+(1/3))/2);
 
 type Props = {};
 export default class Calculator extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
-    );
-  }
+    static propTypes = {
+      onOpenSettings: PropTypes.func.isRequired,
+      calcCustomPercent: PropTypes.number.isRequired,
+    }
+
+      state = {
+        calcState: CALCSTATE.default,
+        calcCustomPercent: this.props.calcCustomPercent,
+      }  
+
+      handleOnSettings = () => {
+        this.props.onOpenSettings(PAGEENUMS.settings);
+      }
+
+      render() {
+        return (
+          <View style={styles.container}>
+            <View style={styles.topmenu}>
+              <TouchableOpacity onPress={this.handleOnSettings}>
+                <Text style={styles.settingsLink}>Settings</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        );
+      }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     backgroundColor: '#F5FCFF',
+    marginTop: Platform.OS === 'ios' ? 30 : 10,
+  },
+  topmenu: {
+    width: '100%',
+    flexDirection: 'row-reverse',
+  },
+  settingsLink: {
+    marginBottom: 5,
+    color: '#667292',
+    marginRight: 10,
   },
   welcome: {
     fontSize: 20,

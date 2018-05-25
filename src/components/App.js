@@ -6,10 +6,12 @@ import {
   View,
   ImageBackground,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 
 import Settings from './Settings';
 import Calculator from './Calculator';
+import Ionicon from 'react-native-vector-icons/Ionicons';
 
 const defaultPerc = (((1/2)+(1/3))/2);
 const PAGEENUMS = Object.freeze({'main':0, 'settings':1});
@@ -42,16 +44,16 @@ updateSettings = (calcState, calcCustomPercent, roommates) => {
 
 updateTotalAmount = (totalAmount) => {
   this.setState({totalAmount});
-  this.updateSplit(totalAmount);
+  this.updateSplit(totalAmount, this.state.calcState, this.state.calcCustomPercent);
 }
 
 updateSplit = (totalAmount, calcState, calcCustomPercent) => {
   const roommate1Amount = 
     (calcState === CALCSTATE.default) ?
-      (totalAmount * defaultPerc) :
-      (totalAmount * calcCustomPercent);
+      (totalAmount * defaultPerc).toFixed(2) :
+      (totalAmount * calcCustomPercent).toFixed(2) ;
 
-  const otherAmount = ((totalAmount - roommate1Amount) / 2);
+  const otherAmount = ((totalAmount - roommate1Amount) / 2).toFixed(2);
 
   const roommateAmounts = {
     '1': roommate1Amount,
@@ -82,16 +84,25 @@ render() {
               </View>
             </View>
 
-            {/* <Calculator onOpenSettings={this.setCurrentPage} 
-            calcState={this.state.calcState}
-            calcCustomPercent={this.state.calcCustomPercent}
-            roommates={this.state.roommates}  
-            roommateAmounts={this.state.roommateAmounts}
-            totalAmount={this.state.totalAmount}
-            updateTotalAmount = {this.updateTotalAmount}
-            style={styles.main}/> */}
+            <Calculator onOpenSettings={this.setCurrentPage} 
+              calcState={this.state.calcState}
+              calcCustomPercent={this.state.calcCustomPercent}
+              roommates={this.state.roommates}  
+              roommateAmounts={this.state.roommateAmounts}
+              totalAmount={this.state.totalAmount}
+              updateTotalAmount = {this.updateTotalAmount}
+              style={styles.main}/>
           </View>
-          
+          <View style={styles.footer}>
+            <TouchableOpacity onPress={() => this.setCurrentPage(PAGEENUMS.settings)}>
+              <Ionicon
+                name= {'ios-settings'}
+                size={30}
+                style={styles.settingsLink}
+              />
+              {/* <Text style={styles.settingsLink}>Settings</Text> */}
+            </TouchableOpacity>
+          </View>
         </ImageBackground>
       </View>
    
@@ -120,7 +131,7 @@ const styles = StyleSheet.create({
     left: 0,
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center'
   },
   loginView: {
@@ -131,7 +142,7 @@ const styles = StyleSheet.create({
   },
   loginTitle: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   travelText: {
@@ -152,5 +163,14 @@ const styles = StyleSheet.create({
   main: {
     //Erik - 5/3/2018 If 'ios' then 30, otherwise if 'android' 10
     marginTop: Platform.OS === 'ios' ? 30 : 10,
+  },
+  footer: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  settingsLink: {
+    marginBottom: 5,
+    color: 'white',
+    
   },
 });

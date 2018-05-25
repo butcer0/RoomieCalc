@@ -4,17 +4,18 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
-  TextInput
+  Dimensions
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Ionicon from 'react-native-vector-icons/Ionicons';
-import Input from 'react-native-elements';
+import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const PAGEENUMS = Object.freeze({'main':0, 'settings':1});
 const CALCSTATE = Object.freeze({'default':0, 'custom':1});
 const defaultPerc = (((1/2)+(1/3))/2);
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 type Props = {};
 export default class Calculator extends Component<Props> {
@@ -31,7 +32,7 @@ export default class Calculator extends Component<Props> {
     state = {
       strCalcCustomPercent: `${this.props.calcCustomPercent}`,
       strTotalAmount: `${this.props.totalAmount}`,
-      email_valid: true,
+      total_valid: true,
       email: '',
     }
 
@@ -39,6 +40,10 @@ export default class Calculator extends Component<Props> {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       
       return re.test(email);
+    }
+
+    validateNumber(strTotal) {
+      return !isNaN(Number(strTotal));
     }
 
     handleTotalChange = (strTotalAmount) => {
@@ -69,53 +74,25 @@ export default class Calculator extends Component<Props> {
               value={this.state.strTotalAmount}
               inputStyle={{marginLeft: 10, color: 'white'}}
               keyboardAppearance="light"
-              placeholder="Email"
+              placeholder="Enter Amount to Split"
               autoFocus={false}
               autoCapitalize="none"
               autoCorrect={false}
-              keyboardType="email-address"
+              keyboardType="numeric"
               returnKeyType="next"
               ref = {(inputElement) => {this.inputElement = inputElement;}}
               onSubmitEditing={() => {
-                this.setState({email_valid: this.validateEmail(this.state.email)});
-                this.passwordInput.focus();
+                this.setState({total_valid: this.validateNumber(this.state.totalAmount)});
               }}
-              blurOnSubmit={false}
+              blurOnSubmit={true}
               placeholderTextColor="white"
-              errorStyle={{textAlign: 'center', fontSize: 12}}
-              errorMessage={this.state.email_valid ? null : 'Please enter a valid email address'}
-            />
-            <Text>{`${this.props.roommates['1']}: ${this.props.roommateAmounts['1']}`}</Text>
-            <Text>{`${this.props.roommates['2a']}: ${this.props.roommateAmounts['2a']}`}</Text>
-            <Text>{`${this.props.roommates['2b']}: ${this.props.roommateAmounts['2b']}`}</Text>
+              errorStyle={{textAlign: 'center', fontSize: 16}}
+              errorMessage={this.state.total_valid ? null : 'Please enter a valid total'}
+            /> 
+            <Text style={styles.roommateLabel}>{`${this.props.roommates['1']}: ${this.props.roommateAmounts['1']}`}</Text>
+            <Text style={styles.roommateLabel}>{`${this.props.roommates['2a']}: ${this.props.roommateAmounts['2a']}`}</Text>
+            <Text style={styles.roommateLabel}>{`${this.props.roommates['2b']}: ${this.props.roommateAmounts['2b']}`}</Text>
           </View>
-
-        //   <View style={styles.container}>
-        //     <View style={styles.topmenu}>
-        //       <TouchableOpacity onPress={this.handleOnSettings}>
-        //         <Ionicon
-        //           name= {'ios-settings'}
-        //           size={30}
-        //           style={styles.settingsLink}
-        //         />
-        //         {/* <Text style={styles.settingsLink}>Settings</Text> */}
-        //       </TouchableOpacity>
-        //     </View>
-        //     <View>
-        //       <TextInput
-        //         ref = {(inputElement) => {this.inputElement = inputElement;}}
-        //         value={this.state.strTotalAmount}
-        //         placeholder = 'Enter Amount to Split'
-        //         style={styles.input}
-        //         keyboardType = 'numeric'
-        //         onChangeText={this.handleTotalChange} />
-        //     </View>
-        //     <View>
-        //       <Text>{`${this.props.roommates['1']}: ${this.props.roommateAmounts['1']}`}</Text>
-        //       <Text>{`${this.props.roommates['2a']}: ${this.props.roommateAmounts['2a']}`}</Text>
-        //       <Text>{`${this.props.roommates['2b']}: ${this.props.roommateAmounts['2b']}`}</Text>
-        //     </View>
-        //   </View>
         );
       }
 }
@@ -146,5 +123,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  roommateLabel: {
+    color: 'white',
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 22,
+  },
+  loginInput: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });

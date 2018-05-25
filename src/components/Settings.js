@@ -4,16 +4,20 @@ import {
   Text,
   View,
   TouchableOpacity,
-  TextInput,
-  Platform
+  Platform,
+  Dimensions
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
 import Ionicon from 'react-native-vector-icons/Ionicons';
+import { Input, Card } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-var PAGEENUMS = Object.freeze({'main':0, 'settings':1});
-var CALCSTATE = Object.freeze({'default':0, 'custom':1});
+const PAGEENUMS = Object.freeze({'main':0, 'settings':1});
+const CALCSTATE = Object.freeze({'default':0, 'custom':1});
 const defaultPerc = (((1/2)+(1/3))/2);
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 type Props = {};
 export default class Settings extends Component<Props> {
@@ -68,16 +72,19 @@ export default class Settings extends Component<Props> {
     render() {
       return (
         <View style={styles.main}>
-          <TouchableOpacity onPress={this.handleOnBack}>
-            <Ionicon
-              name= {'ios-arrow-back'}
-              size={30}
-              style={styles.backLink}
-            />
-            {/* <Text style={styles.backLink}>Back</Text> */}
-          </TouchableOpacity>
+          <View style={styles.navBar}>
+            <TouchableOpacity onPress={this.handleOnBack}>
+              <Ionicon
+                name= {'ios-arrow-back'}
+                size={30}
+                style={styles.backLink}
+              />
+              {/* <Text style={styles.backLink}>Back</Text> */}
+            </TouchableOpacity>
+          </View>
+         
           
-          <View>
+          <Card title = 'Settings' >
             <RadioGroup
               size={24}
               thickness={2}
@@ -87,19 +94,20 @@ export default class Settings extends Component<Props> {
               onSelect = {(index, calcState) => this.onSelectRadio(index, calcState)}
             >
               <RadioButton value={CALCSTATE.default}>
-                <Text>Default</Text>
+                <Text style={styles.radioButtonText}>Default</Text>
               </RadioButton>
 
               <RadioButton value={CALCSTATE.custom}>
-                <Text>Custom</Text>
+                <Text style={styles.radioButtonText}>Custom</Text>
               </RadioButton>
             </RadioGroup>
           
             {this.state.calcState == CALCSTATE.custom && (
               <View style={styles.textInputRow}>
-                <TextInput
+                <Input
                   ref = {(inputElement) => {this.inputElement = inputElement;}}
                   value={this.state.strCalcCustomPercent}
+                  inputStyle={{marginLeft: 10, color: 'black'}}
                   placeholder = 'Enter Custom Percentage'
                   style={styles.input}
                   keyboardType = 'numeric'
@@ -110,35 +118,59 @@ export default class Settings extends Component<Props> {
                 </TouchableOpacity>
               </View>
             )}
-          </View>
-          <View>
-            <Text>Room 1</Text>
-            <TextInput
-              ref = {(inputElement) => {this.inputElement = inputElement;}}
-              value={this.state.roommates['1']}
-              placeholder = 'Roommate 1 Name'
-              style={styles.input}
-              keyboardType = 'default'
-              onChangeText={(text) => this.handleRoommateChange(text,'1')} />
-          </View>
-          <View>
-            <Text>Room 2</Text>
-            <TextInput
-              ref = {(inputElement) => {this.inputElement = inputElement;}}
-              value={this.state.roommates['2a']}
-              placeholder = 'Roommate 1 Name'
-              style={styles.input}
-              keyboardType = 'default'
-              onChangeText={(text) => this.handleRoommateChange(text,'2a')} />
-            <TextInput
-              ref = {(inputElement) => {this.inputElement = inputElement;}}
-              value={this.state.roommates['2b']}
-              placeholder = 'Roommate 2 Name'
-              style={styles.input}
-              keyboardType = 'default'
-              onChangeText={(text) => this.handleRoommateChange(text,'2b')} />
-          </View>
+          </Card>
+          <Card>
+            <View>
+              <Text style={styles.roommateheader}>Room 1</Text>
+              <Input
+                leftIcon={
+                  <Icon 
+                    name='user-o'
+                    color='rgba(171, 189, 219, 1)'
+                    size={25} />
+                } 
+                ref = {(inputElement) => {this.inputElement = inputElement;}}
+                value={this.state.roommates['1']}
+                inputStyle={{marginLeft: 10, color: 'black'}}
+                placeholder = 'Roommate 1 Name'
+                style={styles.input}
+                keyboardType = 'default'
+                onChangeText={(text) => this.handleRoommateChange(text,'1')} />
+            </View>
+            <View>
+              <Text style={styles.roommateheader}>Room 2</Text>
+              <Input
+                leftIcon={
+                  <Icon 
+                    name='user-o'
+                    color='rgba(171, 189, 219, 1)'
+                    size={25} />
+                } 
+                ref = {(inputElement) => {this.inputElement = inputElement;}}
+                value={this.state.roommates['2a']}
+                inputStyle={{marginLeft: 10, color: 'black'}}
+                placeholder = 'Roommate 1 Name'
+                style={styles.input}
+                keyboardType = 'default'
+                onChangeText={(text) => this.handleRoommateChange(text,'2a')} />
+              <Input
+                leftIcon={
+                  <Icon 
+                    name='user-o'
+                    color='rgba(171, 189, 219, 1)'
+                    size={25} />
+                } 
+                ref = {(inputElement) => {this.inputElement = inputElement;}}
+                value={this.state.roommates['2b']}
+                inputStyle={{marginLeft: 10, color: 'black'}}
+                placeholder = 'Roommate 2 Name'
+                style={styles.input}
+                keyboardType = 'default'
+                onChangeText={(text) => this.handleRoommateChange(text,'2b')} />
+            </View>
+          </Card>
         </View>
+        
       );
     }
 }
@@ -148,21 +180,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     color: '#87bdd8',
     marginLeft: 10,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
   textInputContainer: {
     flex: 1,
@@ -180,6 +197,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
     width: '80%',
   },
+  inputStyle: {
+    marginLeft: 10,
+    color: 'white'
+  },
   cirButton: {
     borderWidth:1,
     borderColor:'rgba(0,0,0,0.2)',
@@ -193,6 +214,24 @@ const styles = StyleSheet.create({
   main: {
     //Erik - 5/3/2018 If 'ios' then 30, otherwise if 'android' 10
     marginTop: Platform.OS === 'ios' ? 30 : 10,
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
+    flex: 1,
+    backgroundColor: 'rgba(47,44,60,1)',
   },
+  navBar: {
+    height: 60,
+    width: SCREEN_WIDTH,
+    justifyContent: 'center',
+    alignContent: 'center'
+  },
+  roommateheader: {
+    color: 'black',
+    fontSize: 22,
+    fontFamily: 'Montserrat-Regular',
+  },
+  radioButtonText: {
+    color: 'black',
+    fontSize: 18,
+    fontFamily: 'Montserrat-Regular',
+  }
 });

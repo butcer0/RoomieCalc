@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button';
+import Ionicon from 'react-native-vector-icons/Ionicons';
 
 var PAGEENUMS = Object.freeze({'main':0, 'settings':1});
 var CALCSTATE = Object.freeze({'default':0, 'custom':1});
@@ -68,7 +69,12 @@ export default class Settings extends Component<Props> {
       return (
         <View style={styles.main}>
           <TouchableOpacity onPress={this.handleOnBack}>
-            <Text style={styles.backLink}>Back</Text>
+            <Ionicon
+              name= {'ios-arrow-back'}
+              size={30}
+              style={styles.backLink}
+            />
+            {/* <Text style={styles.backLink}>Back</Text> */}
           </TouchableOpacity>
           
           <View>
@@ -140,7 +146,7 @@ export default class Settings extends Component<Props> {
 const styles = StyleSheet.create({
   backLink: {
     marginBottom: 5,
-    color: '#667292',
+    color: '#87bdd8',
     marginLeft: 10,
   },
   container: {

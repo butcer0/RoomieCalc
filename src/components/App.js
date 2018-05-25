@@ -3,21 +3,27 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  ImageBackground,
+  Dimensions,
 } from 'react-native';
 
 import Settings from './Settings';
 import Calculator from './Calculator';
-const defaultPerc = (((1/2)+(1/3))/2);
 
-var PAGEENUMS = Object.freeze({'main':0, 'settings':1});
-var CALCSTATE = Object.freeze({'default':0, 'custom':1});
+const defaultPerc = (((1/2)+(1/3))/2);
+const PAGEENUMS = Object.freeze({'main':0, 'settings':1});
+const CALCSTATE = Object.freeze({'default':0, 'custom':1});
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+
+const BG_IMAGE = require('../../assets/images/bg_screen1.jpg');
 
 type Props = {};
 export default class App extends Component<Props> {
 
   state = {
-    currentPage: PAGEENUMS.settings,
+    currentPage: PAGEENUMS.main,
     calcState: CALCSTATE.default,
     calcCustomPercent: defaultPerc,
     roommates: {'1': 'Laura', '2a': 'Erik', '2b' : 'Christine'},
@@ -56,17 +62,39 @@ updateSplit = (totalAmount, calcState, calcCustomPercent) => {
   this.setState({roommateAmounts});
 }
 
+
+
 render() {
   if(this.state.currentPage == PAGEENUMS.main) {
     return (
-      <Calculator onOpenSettings={this.setCurrentPage} 
-        calcState={this.state.calcState}
-        calcCustomPercent={this.state.calcCustomPercent}
-        roommates={this.state.roommates}  
-        roommateAmounts={this.state.roommateAmounts}
-        totalAmount={this.state.totalAmount}
-        updateTotalAmount = {this.updateTotalAmount}
-        style={styles.main}/>
+      <View style={styles.container}>
+        <ImageBackground
+          source={BG_IMAGE}
+          style={styles.bgImage} 
+        >
+          <View style={styles.loginView}>
+            <View style={styles.loginTitle}>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.travelText}>ROOMIE</Text>
+              </View>
+              <View style={{marginTop: -10}}>
+                <Text style={styles.travelText}>CALCULATOR</Text>
+              </View>
+            </View>
+
+            {/* <Calculator onOpenSettings={this.setCurrentPage} 
+            calcState={this.state.calcState}
+            calcCustomPercent={this.state.calcCustomPercent}
+            roommates={this.state.roommates}  
+            roommateAmounts={this.state.roommateAmounts}
+            totalAmount={this.state.totalAmount}
+            updateTotalAmount = {this.updateTotalAmount}
+            style={styles.main}/> */}
+          </View>
+          
+        </ImageBackground>
+      </View>
+   
     );
   } else if(this.state.currentPage == PAGEENUMS.settings) {
     return (
@@ -85,9 +113,31 @@ render() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  bgImage: {
+    flex: 1,
+    top: 0,
+    left: 0,
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  loginView: {
+    marginTop: 150,
+    backgroundColor: 'transparent',
+    width: 250,
+    height: 400,
+  },
+  loginTitle: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+  },
+  travelText: {
+    color: 'white',
+    fontSize: 30,
+    fontFamily: 'Montserrat-Bold'
   },
   welcome: {
     fontSize: 20,

@@ -49,6 +49,13 @@
 		B899A409A4114ED39B510632 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DC012B1125A4EC2A542F792 /* Octicons.ttf */; };
 		62C936181E7141A19C8EFB77 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C136203140948888B5FDFBC /* SimpleLineIcons.ttf */; };
 		AB02771EB1344FCF95406128 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CEFFA0E28414EE0AEB3BDEC /* Zocial.ttf */; };
+		907B56832D8143448C6C3B46 /* Georgia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E92FB17FC70D4E1A991BBA39 /* Georgia.ttf */; };
+		69A8769C48494C35898ED2B9 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4F4314E3F92415A8E3F0E9E /* Montserrat-Bold.ttf */; };
+		6F30124D18424D3D81F61324 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DE0388CAAE24340BCD7E1C7 /* Montserrat-Light.ttf */; };
+		915995D7DAAA431FAD5FB74B /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE65A40B1A1E47E7BB693DCF /* Montserrat-Regular.ttf */; };
+		18E9C586B4AA49E3BD6DC2D1 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53BB7EAD60E54932840A988E /* Ubuntu-Bold.ttf */; };
+		78A807C105F5424DAFD51AF1 /* Ubuntu-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BCDD68759E34490A92DBE2B /* Ubuntu-Light-Italic.ttf */; };
+		F5518AE7F97C41AA886D0820 /* Ubuntu-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A78B13939FCB404E902AF1BE /* Ubuntu-Light.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -367,6 +374,13 @@
 		2DC012B1125A4EC2A542F792 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		9C136203140948888B5FDFBC /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		5CEFFA0E28414EE0AEB3BDEC /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E92FB17FC70D4E1A991BBA39 /* Georgia.ttf */ = {isa = PBXFileReference; name = "Georgia.ttf"; path = "../assets/fonts/Georgia.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D4F4314E3F92415A8E3F0E9E /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; name = "Montserrat-Bold.ttf"; path = "../assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2DE0388CAAE24340BCD7E1C7 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; name = "Montserrat-Light.ttf"; path = "../assets/fonts/Montserrat-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BE65A40B1A1E47E7BB693DCF /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; name = "Montserrat-Regular.ttf"; path = "../assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		53BB7EAD60E54932840A988E /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Bold.ttf"; path = "../assets/fonts/Ubuntu-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2BCDD68759E34490A92DBE2B /* Ubuntu-Light-Italic.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Light-Italic.ttf"; path = "../assets/fonts/Ubuntu-Light-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A78B13939FCB404E902AF1BE /* Ubuntu-Light.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Light.ttf"; path = "../assets/fonts/Ubuntu-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -645,6 +659,13 @@
 				2DC012B1125A4EC2A542F792 /* Octicons.ttf */,
 				9C136203140948888B5FDFBC /* SimpleLineIcons.ttf */,
 				5CEFFA0E28414EE0AEB3BDEC /* Zocial.ttf */,
+				E92FB17FC70D4E1A991BBA39 /* Georgia.ttf */,
+				D4F4314E3F92415A8E3F0E9E /* Montserrat-Bold.ttf */,
+				2DE0388CAAE24340BCD7E1C7 /* Montserrat-Light.ttf */,
+				BE65A40B1A1E47E7BB693DCF /* Montserrat-Regular.ttf */,
+				53BB7EAD60E54932840A988E /* Ubuntu-Bold.ttf */,
+				2BCDD68759E34490A92DBE2B /* Ubuntu-Light-Italic.ttf */,
+				A78B13939FCB404E902AF1BE /* Ubuntu-Light.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1107,6 +1128,13 @@
 				B899A409A4114ED39B510632 /* Octicons.ttf in Resources */,
 				62C936181E7141A19C8EFB77 /* SimpleLineIcons.ttf in Resources */,
 				AB02771EB1344FCF95406128 /* Zocial.ttf in Resources */,
+				907B56832D8143448C6C3B46 /* Georgia.ttf in Resources */,
+				69A8769C48494C35898ED2B9 /* Montserrat-Bold.ttf in Resources */,
+				6F30124D18424D3D81F61324 /* Montserrat-Light.ttf in Resources */,
+				915995D7DAAA431FAD5FB74B /* Montserrat-Regular.ttf in Resources */,
+				18E9C586B4AA49E3BD6DC2D1 /* Ubuntu-Bold.ttf in Resources */,
+				78A807C105F5424DAFD51AF1 /* Ubuntu-Light-Italic.ttf in Resources */,
+				F5518AE7F97C41AA886D0820 /* Ubuntu-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

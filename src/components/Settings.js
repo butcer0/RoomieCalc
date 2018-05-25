@@ -18,27 +18,32 @@ type Props = {};
 export default class Settings extends Component<Props> {
   
     static propTypes = {
+      calcState: PropTypes.number.isRequired,
       onBack: PropTypes.func.isRequired,
       updateSettings: PropTypes.func.isRequired,
       calcCustomPercent: PropTypes.number.isRequired,
+      roommates: PropTypes.object.isRequired,
     }
 
     state = {
-      calcState: CALCSTATE.default,
+      calcState: this.props.calcState,
       calcCustomPercent: this.props.calcCustomPercent,
       strCalcCustomPercent: `${this.props.calcCustomPercent}`,
+      roommates: this.props.roommates,
     }  
 
     handlePercentChange = (strCalcCustomPercent) => {
       this.setState({strCalcCustomPercent});
-      let calcCustomPercent = Number(strCalcCustomPercent);
+      const calcCustomPercent = Number(strCalcCustomPercent);
       if(!isNaN(calcCustomPercent)) {
         this.setState({calcCustomPercent});
-        this.props.updateSettings(this.state.calcState, calcCustomPercent);    
       }    
     }
 
     handleOnBack = () => {
+      this.props.updateSettings(this.state.calcState
+        , this.state.calcCustomPercent
+        , this.state.roommates);    
       this.props.onBack(PAGEENUMS.main);
     }
 
@@ -47,6 +52,12 @@ export default class Settings extends Component<Props> {
         strCalcCustomPercent: '',
         calcCustomPercent: defaultPerc,
       });
+    }
+
+    handleRoommateChange = (newName, roommate) => {
+      let roommates = this.state.roommates;
+      roommates[roommate] = newName;
+      this.setState({roommates});
     }
 
     onSelectRadio = (index, calcState) => {
@@ -66,7 +77,7 @@ export default class Settings extends Component<Props> {
               thickness={2}
               color='#87bdd8'
               highlightColor='#cfe0e8'
-              selectedIndex={0}
+              selectedIndex={this.state.calcState}
               onSelect = {(index, calcState) => this.onSelectRadio(index, calcState)}
             >
               <RadioButton value={CALCSTATE.default}>
@@ -79,7 +90,7 @@ export default class Settings extends Component<Props> {
             </RadioGroup>
           
             {this.state.calcState == CALCSTATE.custom && (
-              <View style={styles.textInputContainer}>
+              <View style={styles.textInputRow}>
                 <TextInput
                   ref = {(inputElement) => {this.inputElement = inputElement;}}
                   value={this.state.strCalcCustomPercent}
@@ -93,6 +104,33 @@ export default class Settings extends Component<Props> {
                 </TouchableOpacity>
               </View>
             )}
+          </View>
+          <View>
+            <Text>Room 1</Text>
+            <TextInput
+              ref = {(inputElement) => {this.inputElement = inputElement;}}
+              value={this.state.roommates['1']}
+              placeholder = 'Roommate 1 Name'
+              style={styles.input}
+              keyboardType = 'default'
+              onChangeText={(text) => this.handleRoommateChange(text,'1')} />
+          </View>
+          <View>
+            <Text>Room 2</Text>
+            <TextInput
+              ref = {(inputElement) => {this.inputElement = inputElement;}}
+              value={this.state.roommates['2a']}
+              placeholder = 'Roommate 1 Name'
+              style={styles.input}
+              keyboardType = 'default'
+              onChangeText={(text) => this.handleRoommateChange(text,'2a')} />
+            <TextInput
+              ref = {(inputElement) => {this.inputElement = inputElement;}}
+              value={this.state.roommates['2b']}
+              placeholder = 'Roommate 2 Name'
+              style={styles.input}
+              keyboardType = 'default'
+              onChangeText={(text) => this.handleRoommateChange(text,'2b')} />
           </View>
         </View>
       );
@@ -122,6 +160,11 @@ const styles = StyleSheet.create({
   },
   textInputContainer: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  textInputRow: {
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',

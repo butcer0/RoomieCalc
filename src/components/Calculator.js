@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -16,13 +17,27 @@ type Props = {};
 export default class Calculator extends Component<Props> {
     static propTypes = {
       onOpenSettings: PropTypes.func.isRequired,
+      calcState: PropTypes.number.isRequired,
       calcCustomPercent: PropTypes.number.isRequired,
+      roommates: PropTypes.object.isRequired,
+      roommateAmounts: PropTypes.object.isRequired,
+      totalAmount: PropTypes.number.isRequired,
+      updateTotalAmount: PropTypes.func.isRequired,
     }
 
-      state = {
-        calcState: CALCSTATE.default,
-        calcCustomPercent: this.props.calcCustomPercent,
-      }  
+    state = {
+      strCalcCustomPercent: `${this.props.calcCustomPercent}`,
+      strTotalAmount: `${this.props.totalAmount}`,
+    }
+
+    handleTotalChange = (strTotalAmount) => {
+      this.setState({strTotalAmount});
+      const totalAmount = Number(strTotalAmount);
+      if(!isNaN(totalAmount))
+      {
+        this.props.updateTotalAmount(totalAmount);
+      } 
+    }
 
       handleOnSettings = () => {
         this.props.onOpenSettings(PAGEENUMS.settings);
@@ -35,6 +50,20 @@ export default class Calculator extends Component<Props> {
               <TouchableOpacity onPress={this.handleOnSettings}>
                 <Text style={styles.settingsLink}>Settings</Text>
               </TouchableOpacity>
+            </View>
+            <View>
+              <TextInput
+                ref = {(inputElement) => {this.inputElement = inputElement;}}
+                value={this.state.strTotalAmount}
+                placeholder = 'Enter Amount to Split'
+                style={styles.input}
+                keyboardType = 'numeric'
+                onChangeText={this.handleTotalChange} />
+            </View>
+            <View>
+              <Text>{`${this.props.roommates['1']}: ${this.props.roommateAmounts['1']}`}</Text>
+              <Text>{`${this.props.roommates['2a']}: ${this.props.roommateAmounts['2a']}`}</Text>
+              <Text>{`${this.props.roommates['2b']}: ${this.props.roommateAmounts['2b']}`}</Text>
             </View>
           </View>
         );

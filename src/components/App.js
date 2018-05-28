@@ -19,7 +19,6 @@ const CALCSTATE = Object.freeze({'default':0, 'custom':1});
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../assets/images/bg_screen1.jpg');
 const BG_IMAGES = {'0': require('../../assets/images/bg_screen1.jpg')
   , '1': require('../../assets/images/bg_screen2.jpg')
   , '2': require('../../assets/images/bg_screen3.jpg')

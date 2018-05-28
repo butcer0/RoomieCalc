@@ -89,18 +89,18 @@ export default class Calculator extends Component<Props> {
               errorStyle={{textAlign: 'center', fontSize: 16}}
               errorMessage={this.state.total_valid ? null : 'Please enter a valid total'}
             /> 
-            <Card title='Roommate Split' containerStyle={styles.valuesContainer}>
+            <Card title='Roommate Split' containerStyle={styles.valuesContainer} >  
               <View style={styles.valuesRow}>
                 <Text style={styles.roommateLabel}>{`${this.props.roommates['1']}`}</Text>
-                <Text style={styles.roommateValue}>{`${this.props.roommateAmounts['1']}`}</Text>
+                <Text style={styles.roommateValue}>{`$${this.props.roommateAmounts['1']}`}</Text>
               </View>
               <View style={styles.valuesRow}>
                 <Text style={styles.roommateLabel}>{`${this.props.roommates['2a']}`}</Text>
-                <Text style={styles.roommateValue}>{`${this.props.roommateAmounts['2a']}`}</Text>
+                <Text style={styles.roommateValue}>{`$${this.props.roommateAmounts['2a']}`}</Text>
               </View>
               <View style={styles.valuesRow}>
                 <Text style={styles.roommateLabel}>{`${this.props.roommates['2b']}`}</Text>
-                <Text style={styles.roommateValue}>{`${this.props.roommateAmounts['2b']}`}</Text>
+                <Text style={styles.roommateValue}>{`$${this.props.roommateAmounts['2b']}`}</Text>
               </View>
               {/* <Text style={styles.roommateLabel}>{`${this.props.roommates['1']}: ${this.props.roommateAmounts['1']}`}</Text>
               <Text style={styles.roommateLabel}>{`${this.props.roommates['2a']}: ${this.props.roommateAmounts['2a']}`}</Text>
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   },
   valuesContainer: {
     flexDirection: 'column',
-    padding: 0,
+    padding: 10,
     width: '90%',
     backgroundColor: 'white'
   },
@@ -148,18 +148,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
+    
   },
   roommateLabel: {
     color: '#36486b',
     fontFamily: 'Montserrat-Bold',
     fontSize: 18,
-    marginLeft: 10,
   },
   roommateValue: {
     color: '#618685',
     fontFamily: 'Montserrat-Bold',
     fontSize: 18,
-    marginRight: 10,
   },
   loginInput: {
     flex: 1,

@@ -87,7 +87,7 @@ export default class Calculator extends Component<Props> {
               blurOnSubmit={true}
               placeholderTextColor="white"
               errorStyle={{textAlign: 'center', fontSize: 16}}
-              errorMessage={this.state.total_valid ? null : 'Please enter a valid total'}
+              errorMessage={this.state.total_valid ? null : null}
             /> 
             <Card title='Roommate Split' containerStyle={styles.valuesContainer} >  
               <View style={styles.valuesRow}>

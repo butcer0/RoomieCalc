@@ -20,6 +20,14 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const BG_IMAGE = require('../../assets/images/bg_screen1.jpg');
+const BG_IMAGES = {'0': require('../../assets/images/bg_screen1.jpg')
+  , '1': require('../../assets/images/bg_screen2.jpg')
+  , '2': require('../../assets/images/bg_screen3.jpg')
+  , '3': require('../../assets/images/bg_screen4.jpg')
+  , '4': require('../../assets/images/wallpaper_1.jpg')
+  , '5': require('../../assets/images/wallpaper_2.jpg')
+  , '6': require('../../assets/images/wallpaper_3.jpg')
+  , '7': require('../../assets/images/wallpaper_4.jpg') }
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -30,7 +38,8 @@ export default class App extends Component<Props> {
     calcCustomPercent: defaultPerc,
     roommates: {'1': 'Laura', '2a': 'Erik', '2b' : 'Christine'},
     roommateAmounts: {'1':5.22, '2a':2.12, '2b':3.12},
-    totalAmount: 512.00,
+    totalAmount: 0.00,
+    selectedBG_Image: 7,
   }
 
 setCurrentPage = (currentPage) => {
@@ -64,16 +73,23 @@ updateSplit = (totalAmount, calcState, calcCustomPercent) => {
   this.setState({roommateAmounts});
 }
 
+updateWallpaper = (selectedBG_Image) => {
+  this.setState({selectedBG_Image});
+}
 
 
 render() {
   if(this.state.currentPage == PAGEENUMS.main) {
     return (
       <View style={styles.container}>
-        <ImageBackground
-          source={BG_IMAGE}
+      <ImageBackground
+          source={BG_IMAGES[this.state.selectedBG_Image]}
           style={styles.bgImage} 
         >
+        {/* <ImageBackground
+          source={BG_IMAGE}
+          style={styles.bgImage} 
+        > */}
           <View style={styles.loginView}>
             <View style={styles.loginTitle}>
               <View style={{flexDirection: 'row'}}>
@@ -114,6 +130,9 @@ render() {
         onBack={this.setCurrentPage} 
         calcCustomPercent={this.state.calcCustomPercent}
         roommates={this.state.roommates}
+        BG_IMAGES={BG_IMAGES}
+        selectedBG_Image={this.state.selectedBG_Image}
+        updateWallpaper={this.updateWallpaper}
         style={styles.main}/>
     );
   }

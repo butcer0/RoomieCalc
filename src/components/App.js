@@ -135,10 +135,10 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   loginView: {
-    marginTop: 150,
+    marginTop: '10%',
     backgroundColor: 'transparent',
-    width: 250,
-    height: 400,
+    width: '90%',
+    height: '80%',
   },
   loginTitle: {
     flex: 1,

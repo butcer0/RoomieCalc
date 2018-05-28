@@ -4,11 +4,11 @@ import {
   StyleSheet,
   Text,
   View,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import Ionicon from 'react-native-vector-icons/Ionicons';
-import { Input } from 'react-native-elements';
+import { Input, Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const PAGEENUMS = Object.freeze({'main':0, 'settings':1});
@@ -69,7 +69,7 @@ export default class Calculator extends Component<Props> {
                   color='rgba(171, 189, 219, 1)'
                   size={25} />
               } 
-              containerStyle={{marginVertical: 10}}
+              containerStyle={{marginVertical: 10, width: '80%'}}
               onChangeText={this.handleTotalChange}
               value={this.state.strTotalAmount}
               inputStyle={{marginLeft: 10, color: 'white'}}
@@ -89,9 +89,23 @@ export default class Calculator extends Component<Props> {
               errorStyle={{textAlign: 'center', fontSize: 16}}
               errorMessage={this.state.total_valid ? null : 'Please enter a valid total'}
             /> 
-            <Text style={styles.roommateLabel}>{`${this.props.roommates['1']}: ${this.props.roommateAmounts['1']}`}</Text>
-            <Text style={styles.roommateLabel}>{`${this.props.roommates['2a']}: ${this.props.roommateAmounts['2a']}`}</Text>
-            <Text style={styles.roommateLabel}>{`${this.props.roommates['2b']}: ${this.props.roommateAmounts['2b']}`}</Text>
+            <Card title='Roommate Split' containerStyle={styles.valuesContainer}>
+              <View style={styles.valuesRow}>
+                <Text style={styles.roommateLabel}>{`${this.props.roommates['1']}`}</Text>
+                <Text style={styles.roommateValue}>{`${this.props.roommateAmounts['1']}`}</Text>
+              </View>
+              <View style={styles.valuesRow}>
+                <Text style={styles.roommateLabel}>{`${this.props.roommates['2a']}`}</Text>
+                <Text style={styles.roommateValue}>{`${this.props.roommateAmounts['2a']}`}</Text>
+              </View>
+              <View style={styles.valuesRow}>
+                <Text style={styles.roommateLabel}>{`${this.props.roommates['2b']}`}</Text>
+                <Text style={styles.roommateValue}>{`${this.props.roommateAmounts['2b']}`}</Text>
+              </View>
+              {/* <Text style={styles.roommateLabel}>{`${this.props.roommates['1']}: ${this.props.roommateAmounts['1']}`}</Text>
+              <Text style={styles.roommateLabel}>{`${this.props.roommates['2a']}: ${this.props.roommateAmounts['2a']}`}</Text>
+              <Text style={styles.roommateLabel}>{`${this.props.roommates['2b']}: ${this.props.roommateAmounts['2b']}`}</Text> */}
+            </Card>
           </View>
         );
       }
@@ -112,7 +126,7 @@ const styles = StyleSheet.create({
   settingsLink: {
     marginBottom: 5,
     color: '#87bdd8',
-    marginRight: 10,
+    marginTop: 20,
   },
   welcome: {
     fontSize: 20,
@@ -124,10 +138,28 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  valuesContainer: {
+    flexDirection: 'column',
+    padding: 0,
+    width: '90%',
+    backgroundColor: 'white'
+  },
+  valuesRow: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+  },
   roommateLabel: {
-    color: 'white',
+    color: '#36486b',
     fontFamily: 'Montserrat-Bold',
-    fontSize: 22,
+    fontSize: 18,
+    marginLeft: 10,
+  },
+  roommateValue: {
+    color: '#618685',
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 18,
+    marginRight: 10,
   },
   loginInput: {
     flex: 1,

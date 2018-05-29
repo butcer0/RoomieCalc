@@ -7,6 +7,8 @@ import {
   ImageBackground,
   Dimensions,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 
 import Settings from './Settings';
@@ -80,46 +82,44 @@ updateWallpaper = (selectedBG_Image) => {
 render() {
   if(this.state.currentPage == PAGEENUMS.main) {
     return (
-      <View style={styles.container}>
-      <ImageBackground
-          source={BG_IMAGES[this.state.selectedBG_Image]}
-          style={styles.bgImage} 
-        >
-        {/* <ImageBackground
-          source={BG_IMAGE}
-          style={styles.bgImage} 
-        > */}
-          <View style={styles.loginView}>
-            <View style={styles.loginTitle}>
-              <View style={{flexDirection: 'row'}}>
-                <Text style={styles.travelText}>ROOMIE</Text>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.container}>
+          <ImageBackground
+            source={BG_IMAGES[this.state.selectedBG_Image]}
+            style={styles.bgImage} 
+          >
+            <View style={styles.loginView}>
+              <View style={styles.loginTitle}>
+                <View style={{flexDirection: 'row'}}>
+                  <Text style={styles.travelText}>ROOMIE</Text>
+                </View>
+                <View style={{marginTop: -10}}>
+                  <Text style={styles.travelText}>CALCULATOR</Text>
+                </View>
               </View>
-              <View style={{marginTop: -10}}>
-                <Text style={styles.travelText}>CALCULATOR</Text>
-              </View>
-            </View>
 
-            <Calculator onOpenSettings={this.setCurrentPage} 
-              calcState={this.state.calcState}
-              calcCustomPercent={this.state.calcCustomPercent}
-              roommates={this.state.roommates}  
-              roommateAmounts={this.state.roommateAmounts}
-              totalAmount={this.state.totalAmount}
-              updateTotalAmount = {this.updateTotalAmount}
-              style={styles.main}/>
-          </View>
-          <View style={styles.footer}>
-            <TouchableOpacity onPress={() => this.setCurrentPage(PAGEENUMS.settings)}>
-              <Ionicon
-                name= {'ios-settings'}
-                size={30}
-                style={styles.settingsLink}
-              />
-              {/* <Text style={styles.settingsLink}>Settings</Text> */}
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
-      </View>
+              <Calculator onOpenSettings={this.setCurrentPage} 
+                calcState={this.state.calcState}
+                calcCustomPercent={this.state.calcCustomPercent}
+                roommates={this.state.roommates}  
+                roommateAmounts={this.state.roommateAmounts}
+                totalAmount={this.state.totalAmount}
+                updateTotalAmount = {this.updateTotalAmount}
+                style={styles.main}/>
+            </View>
+            <View style={styles.footer}>
+              <TouchableOpacity onPress={() => this.setCurrentPage(PAGEENUMS.settings)}>
+                <Ionicon
+                  name= {'ios-settings'}
+                  size={30}
+                  style={styles.settingsLink}
+                />
+                {/* <Text style={styles.settingsLink}>Settings</Text> */}
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
+        </View>
+      </TouchableWithoutFeedback>
    
     );
   } else if(this.state.currentPage == PAGEENUMS.settings) {

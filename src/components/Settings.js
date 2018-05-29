@@ -205,7 +205,7 @@ export default class Settings extends Component<Props> {
                 onPress={this.updateSelectedWallpaper}
                 selectedIndex={this.props.selectedBG_Image}
                 buttons={buttons}
-                containerStyle={{height: 100}} />
+                containerStyle={{height: 100, flexDirection: 'column'}} />
             </Card>
           </ScrollView>
         </View>

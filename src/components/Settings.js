@@ -102,113 +102,113 @@ export default class Settings extends Component<Props> {
         , { element: this.wallpaper7 } ]
       return (
        
-          <View style={styles.main}>
+        <View style={styles.main}>
            
-            <View style={styles.navBar}>
-              <TouchableOpacity onPress={this.handleOnBack}>
-                <Ionicon
-                  name= {'ios-arrow-back'}
-                  size={30}
-                  style={styles.backLink}
-                />
-                {/* <Text style={styles.backLink}>Back</Text> */}
-              </TouchableOpacity>
-            </View>
+          <View style={styles.navBar}>
+            <TouchableOpacity onPress={this.handleOnBack}>
+              <Ionicon
+                name= {'ios-arrow-back'}
+                size={30}
+                style={styles.backLink}
+              />
+              {/* <Text style={styles.backLink}>Back</Text> */}
+            </TouchableOpacity>
+          </View>
           
-            <ScrollView style={styles.scrollViewMain} >
-              <Card title = 'Settings' >
-                <RadioGroup
-                  size={24}
-                  thickness={2}
-                  color='#87bdd8'
-                  highlightColor='#cfe0e8'
-                  selectedIndex={this.state.calcState}
-                  onSelect = {(index, calcState) => this.onSelectRadio(index, calcState)}
-                >
-                  <RadioButton value={CALCSTATE.default}>
-                    <Text style={styles.radioButtonText}>Default</Text>
-                  </RadioButton>
+          <ScrollView style={styles.scrollViewMain} >
+            <Card title = 'Settings' >
+              <RadioGroup
+                size={24}
+                thickness={2}
+                color='#87bdd8'
+                highlightColor='#cfe0e8'
+                selectedIndex={this.state.calcState}
+                onSelect = {(index, calcState) => this.onSelectRadio(index, calcState)}
+              >
+                <RadioButton value={CALCSTATE.default}>
+                  <Text style={styles.radioButtonText}>Default</Text>
+                </RadioButton>
 
-                  <RadioButton value={CALCSTATE.custom}>
-                    <Text style={styles.radioButtonText}>Custom</Text>
-                  </RadioButton>
-                </RadioGroup>
+                <RadioButton value={CALCSTATE.custom}>
+                  <Text style={styles.radioButtonText}>Custom</Text>
+                </RadioButton>
+              </RadioGroup>
               
-                {this.state.calcState == CALCSTATE.custom && (
-                  <View style={styles.textInputRow}>
-                    <Input
-                      ref = {(inputElement) => {this.inputElement = inputElement;}}
-                      value={this.state.strCalcCustomPercent}
-                      inputStyle={{marginLeft: 10, color: 'black'}}
-                      placeholder = 'Enter Custom Percentage'
-                      style={styles.input}
-                      keyboardType = 'numeric'
-                      onChangeText={this.handlePercentChange} />
-                    <TouchableOpacity onPress={this.handleClear}>
-                      <Feather name= {'delete'} size={25} />
-                    </TouchableOpacity>
-                  </View>
-                )}
-              </Card>
-              <Card>
-                <View>
-                  <Text style={styles.roommateheader}>Room 1</Text>
+              {this.state.calcState == CALCSTATE.custom && (
+                <View style={styles.textInputRow}>
                   <Input
-                    leftIcon={
-                      <Icon 
-                        name='user-o'
-                        color='rgba(171, 189, 219, 1)'
-                        size={25} />
-                    } 
                     ref = {(inputElement) => {this.inputElement = inputElement;}}
-                    value={this.state.roommates['1']}
+                    value={this.state.strCalcCustomPercent}
                     inputStyle={{marginLeft: 10, color: 'black'}}
-                    placeholder = 'Roommate 1 Name'
+                    placeholder = 'Enter Custom Percentage'
                     style={styles.input}
-                    keyboardType = 'default'
-                    onChangeText={(text) => this.handleRoommateChange(text,'1')} />
+                    keyboardType = 'numeric'
+                    onChangeText={this.handlePercentChange} />
+                  <TouchableOpacity onPress={this.handleClear}>
+                    <Feather name= {'delete'} size={25} />
+                  </TouchableOpacity>
                 </View>
-                <View>
-                  <Text style={styles.roommateheader}>Room 2</Text>
-                  <Input
-                    leftIcon={
-                      <Icon 
-                        name='user-o'
-                        color='rgba(171, 189, 219, 1)'
-                        size={25} />
-                    } 
-                    ref = {(inputElement) => {this.inputElement = inputElement;}}
-                    value={this.state.roommates['2a']}
-                    inputStyle={{marginLeft: 10, color: 'black'}}
-                    placeholder = 'Roommate 1 Name'
-                    style={styles.input}
-                    keyboardType = 'default'
-                    onChangeText={(text) => this.handleRoommateChange(text,'2a')} />
-                  <Input
-                    leftIcon={
-                      <Icon 
-                        name='user-o'
-                        color='rgba(171, 189, 219, 1)'
-                        size={25} />
-                    } 
-                    ref = {(inputElement) => {this.inputElement = inputElement;}}
-                    value={this.state.roommates['2b']}
-                    inputStyle={{marginLeft: 10, color: 'black'}}
-                    placeholder = 'Roommate 2 Name'
-                    style={styles.input}
-                    keyboardType = 'default'
-                    onChangeText={(text) => this.handleRoommateChange(text,'2b')} />
-                </View>
-              </Card>
-              <Card title='Background' >
+              )}
+            </Card>
+            <Card>
+              <View>
+                <Text style={styles.roommateheader}>Room 1</Text>
+                <Input
+                  leftIcon={
+                    <Icon 
+                      name='user-o'
+                      color='rgba(171, 189, 219, 1)'
+                      size={25} />
+                  } 
+                  ref = {(inputElement) => {this.inputElement = inputElement;}}
+                  value={this.state.roommates['1']}
+                  inputStyle={{marginLeft: 10, color: 'black'}}
+                  placeholder = 'Roommate 1 Name'
+                  style={styles.input}
+                  keyboardType = 'default'
+                  onChangeText={(text) => this.handleRoommateChange(text,'1')} />
+              </View>
+              <View>
+                <Text style={styles.roommateheader}>Room 2</Text>
+                <Input
+                  leftIcon={
+                    <Icon 
+                      name='user-o'
+                      color='rgba(171, 189, 219, 1)'
+                      size={25} />
+                  } 
+                  ref = {(inputElement) => {this.inputElement = inputElement;}}
+                  value={this.state.roommates['2a']}
+                  inputStyle={{marginLeft: 10, color: 'black'}}
+                  placeholder = 'Roommate 1 Name'
+                  style={styles.input}
+                  keyboardType = 'default'
+                  onChangeText={(text) => this.handleRoommateChange(text,'2a')} />
+                <Input
+                  leftIcon={
+                    <Icon 
+                      name='user-o'
+                      color='rgba(171, 189, 219, 1)'
+                      size={25} />
+                  } 
+                  ref = {(inputElement) => {this.inputElement = inputElement;}}
+                  value={this.state.roommates['2b']}
+                  inputStyle={{marginLeft: 10, color: 'black'}}
+                  placeholder = 'Roommate 2 Name'
+                  style={styles.input}
+                  keyboardType = 'default'
+                  onChangeText={(text) => this.handleRoommateChange(text,'2b')} />
+              </View>
+            </Card>
+            <Card title='Background' >
               <ButtonGroup
                 onPress={this.updateSelectedWallpaper}
                 selectedIndex={this.props.selectedBG_Image}
                 buttons={buttons}
                 containerStyle={{height: 100}} />
-              </Card>
-            </ScrollView>
-          </View>
+            </Card>
+          </ScrollView>
+        </View>
         
       );
     }
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
   },
   main: {
     //Erik - 5/3/2018 If 'ios' then 30, otherwise if 'android' 10
-    marginTop: Platform.OS === 'ios' ? 30 : 10,
+    marginTop: Platform.OS === 'ios' ? 0 : 10,
     justifyContent: 'flex-start',
     flex: 1,
     backgroundColor: 'rgba(47,44,60,1)',
